@@ -1,0 +1,41 @@
+<div class="container-fluid py-4 page-container">
+  
+  <!-- loading indicator -->
+  @if (isLoading()) {
+    <div class="d-flex justify-content-center align-items-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  } @else {
+    <!--  title/ status badge/ save/cancel  -->
+    <app-page-header
+       [title] = "pageTitle()"
+       [showSearch]="false"
+       [badgeText]="badgeText()"
+       [badgeClass]="badgeClass()"
+       [actions]="headerActions()"
+       (actionClick)="onHeaderAction($event)">
+    </app-page-header>
+    
+
+    <div class="d-block mt-4">
+      
+      <!-- main  /escalation/ reminders -->
+      <app-details-static-form 
+        [requestData]="requestData()"
+        [submitted]="submitted()"
+        [isReadOnly]="pageMode() === 'view'">
+      </app-details-static-form>
+      
+      <!-- dynamic custom sections / attributes -->
+      <app-custom-section 
+        [sections]="requestData().customSections"
+        (sectionsChange)="onCustomSectionsChange($event)"
+        [isReadOnly]="pageMode() === 'view'">
+      </app-custom-section>
+      
+    </div>
+  }
+
+</div>

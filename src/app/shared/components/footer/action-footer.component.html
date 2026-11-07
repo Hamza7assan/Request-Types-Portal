@@ -1,0 +1,22 @@
+<div class="d-flex align-items-center gap-2"
+     [class.justify-content-end]="justify() === 'end'"
+     [class.justify-content-start]="justify() === 'start'"
+     [class.justify-content-between]="justify() === 'between'"
+     [class.justify-content-center]="justify() === 'center'"
+     [class]="containerClass()">
+
+  <ng-content></ng-content>
+
+  @for (btn of actions(); track btn.id) {
+    @if (!btn.hidden) {
+      <dx-button
+        [text]="btn.label"
+        [icon]="btn.icon || ''"
+        [disabled]="!!btn.disabled"
+        [class]="btn.class || 'btn-light px-3'"
+        [elementAttr]="{ class: btn.class || 'btn-light px-3' }"
+        (onClick)="actionClick.emit(btn.id)">
+      </dx-button>
+    }
+  }
+</div>

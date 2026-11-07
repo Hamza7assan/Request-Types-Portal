@@ -1,0 +1,106 @@
+<div>
+  
+  <app-section-divider label="MAIN"></app-section-divider>
+
+  <div class="row gx-5 mb-5 justify-content-between">
+    <!-- left column: Name, Category, Posting role -->
+    <div class="col-12 col-md-5">
+      <!-- Name -->
+      <div class="mb-3">
+        <label class="form-label">
+          Name
+          <span class="text-danger ms-1">*</span>
+        </label>
+        <dx-text-box
+          class="custom-dx-input"
+          [(value)]="requestData().name"
+          [readOnly]="isReadOnly()"
+          [isValid]="!isNameInvalid()"
+          valueChangeEvent="input keyup change"
+          (onValueChanged)="onNameChange($event.value)"
+          (onFocusOut)="onNameBlur()">
+          <dx-validator validationGroup="detailsValidationGroup">
+            <dxi-validation-rule type="required" [trim]="true" message="Request name is required."></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        @if (isNameInvalid()) {
+          <div class="text-danger small mt-1">
+            Request name is required.
+          </div>
+        }
+      </div>
+
+      <!-- Category -->
+      <app-dropdown
+        label="Category"
+        [(value)]="requestData().category"
+        (valueChange)="onCategoryChange($event)"
+        [options]="categoryOptions"
+        [emptyDisabled]="true"
+        [isRequired]="true"
+        errorMessage="Category is required."
+        [readOnly]="isReadOnly()"
+        (touch)="onCategoryBlur()"
+        validationGroup="detailsValidationGroup"
+        containerClass="mb-3">
+      </app-dropdown>
+
+      <!-- Posting role -->
+      <app-dropdown
+        label="Posting role"
+        [(value)]="requestData().postingRole"
+        [options]="postingRoleOptions"
+        [readOnly]="isReadOnly()"
+        containerClass="mb-3">
+      </app-dropdown>
+    </div>
+
+    <!-- right column: Alternate name, Default report, Backdated limit -->
+    <div class="col-12 col-md-5">
+      <!-- Alternate name -->
+      <div class="mb-3">
+        <label class="form-label">Alternate name</label>
+        <dx-text-box
+          class="custom-dx-input"
+          [(value)]="requestData().alternateName"
+          [readOnly]="isReadOnly()">
+        </dx-text-box>
+      </div>
+
+      <!-- Default report -->
+      <app-dropdown
+        label="Default report"
+        [(value)]="requestData().defaultReport"
+        [options]="defaultReportOptions"
+        [readOnly]="isReadOnly()"
+        containerClass="mb-3">
+      </app-dropdown>
+
+      <!-- Backdated request limit -->
+      <app-days-input 
+        label="Backdated request limit" 
+        [(value)]="requestData().backdatedRequestLimit"
+        [readOnly]="isReadOnly()"
+        validationGroup="detailsValidationGroup"
+        containerClass="mb-3">
+      </app-days-input>
+    </div>
+  </div>
+
+  <div class="row gx-5 mb-5 justify-content-between">
+    <div class="col-12 col-md-5">
+      <app-escalation-form 
+        [escalation]="requestData().escalation!"
+        [isReadOnly]="isReadOnly()">
+      </app-escalation-form>
+    </div>
+
+    <div class="col-12 col-md-5">
+      <app-reminders-form 
+        [reminders]="requestData().reminders!"
+        [isReadOnly]="isReadOnly()">
+      </app-reminders-form>
+    </div>
+  </div>
+
+</div>

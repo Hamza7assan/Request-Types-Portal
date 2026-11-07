@@ -1,0 +1,90 @@
+<div class="card bg-light border rounded-4 p-4 position-relative mb-4">
+  
+  <!-- Section name input -->
+  <div class="mb-4 w-50">
+    <label class="form-label">Name</label>
+    <dx-text-box
+      class="custom-dx-input"
+      [readOnly]="isReadOnly()"
+      [(value)]="section().name">
+    </dx-text-box>
+  </div>
+
+  <!-- attributes list -->
+  @if (!section().attributes || section().attributes.length === 0) {
+    @if (!isReadOnly()) {
+      <dx-button 
+        class="btn-add-first-attribute mb-3"
+        [elementAttr]="{ class: 'btn-add-first-attribute mb-3' }"
+        (onClick)="addAttribute.emit()">
+        <div *dxTemplate="let data of 'content'" class="d-flex align-items-center justify-content-center gap-2">
+          <i class="bi bi-plus-circle-fill"></i>
+          <span>Add first attribute</span>
+        </div>
+      </dx-button>
+    } @else {
+      <div class="text-center py-4 text-secondary opacity-75">
+        <p class="mb-0">No attributes in this section</p>
+      </div>
+    }
+
+    <!-- Delete section button -->
+    @if (!isReadOnly()) {
+      <div class="d-flex justify-content-end mt-2">
+        <dx-button
+          class="btn-delete-section-danger"
+          [elementAttr]="{ class: 'btn-delete-section-danger' }"
+          (onClick)="deleteSection.emit()">
+          <div *dxTemplate="let data of 'content'" class="d-flex align-items-center gap-2">
+            <i class="bi bi-trash"></i>
+            <span>Delete section</span>
+          </div>
+        </dx-button>
+      </div>
+    }
+  } @else {
+    <!--  top left Add attribute button -->
+    @if (!isReadOnly()) {
+      <div class="mb-3">
+        <dx-button 
+          class="btn-add-attribute"
+          [elementAttr]="{ class: 'btn-add-attribute' }"
+          (onClick)="addAttribute.emit()">
+          <div *dxTemplate="let data of 'content'" class="d-flex align-items-center gap-2">
+            <i class="bi bi-plus-circle-fill"></i>
+            <span>Add attribute</span>
+          </div>
+        </dx-button>
+      </div>
+    }
+    
+    <!-- The list of added attributes -->
+    <div class="mb-4">
+      @for (attr of section().attributes; track attr.id || $index; let attrIdx = $index) {
+        <app-attribute-item
+          [attribute]="attr"
+          [index]="attrIdx"
+          [isReadOnly]="isReadOnly()"
+          (edit)="editAttribute.emit({ index: attrIdx, data: attr })"
+          (delete)="deleteAttribute.emit(attrIdx)">
+        </app-attribute-item>
+      }
+    </div>
+
+    <!-- Delete section button -->
+    @if (!isReadOnly()) {
+      <div class="d-flex justify-content-end mt-3">
+        <dx-button
+          class="btn-delete-section-danger"
+          [elementAttr]="{ class: 'btn-delete-section-danger' }"
+          (onClick)="deleteSection.emit()">
+          <div *dxTemplate="let data of 'content'" class="d-flex align-items-center gap-2">
+            <i class="bi bi-trash"></i>
+            <span>Delete section</span>
+          </div>
+        </dx-button>
+      </div>
+    }
+  }
+  
+</div>

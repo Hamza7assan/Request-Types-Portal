@@ -1,0 +1,29 @@
+<div>
+  <app-section-divider label="ESCALATION AND SIGNALING"></app-section-divider>
+
+  <app-days-input 
+    label="Single signature timeout before escalation" 
+    [(value)]="escalation().singleSignatureTimeout"
+    [readOnly]="isReadOnly()">
+  </app-days-input>
+
+  <app-dropdown
+    label="Escalate to"
+    [(value)]="escalation().escalateTo"
+    [options]="escalateToOptions"
+    [readOnly]="isReadOnly()">
+  </app-dropdown>
+
+  <app-days-input 
+    label="Request timeout before signaling" 
+    [(value)]="escalation().requestTimeoutBeforeSignaling"
+    [readOnly]="isReadOnly()">
+  </app-days-input>
+
+  <app-dropdown
+    label="Signaling role"
+    [(value)]="escalation().signalingRole"
+    [options]="signalingRoleOptions"
+    [readOnly]="isReadOnly()">
+  </app-dropdown>
+</div>

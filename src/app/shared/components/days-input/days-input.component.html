@@ -1,0 +1,20 @@
+<div [class]="containerClass()">
+  <label class="form-label">{{ label() }}</label>
+  <div class="d-flex align-items-center gap-2">
+    <dx-number-box
+      class="custom-dx-input number-input-sm"
+      format="#"
+      [min]="min()"
+      [showSpinButtons]="true"
+      [showClearButton]="true"
+      [readOnly]="readOnly()"
+      [(value)]="value">
+      @if (isRequired()) {
+        <dx-validator [validationGroup]="validationGroup()">
+          <dxi-validation-rule type="required" [message]="label() + ' is required.'"></dxi-validation-rule>
+        </dx-validator>
+      }
+    </dx-number-box>
+    <span class="small text-muted fw-semibold">{{ unit() }}</span>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="search-bar-wrapper">
+  <dx-text-box
+    class="search-dx-box"
+    [placeholder]="placeholder()"
+    [showClearButton]="true"
+    valueChangeEvent="keyup input change"
+    (onValueChanged)="onSearch($event.value || '')">
+    <dxi-button
+      name="search"
+      location="before"
+      [options]="{ 
+        icon: 'search', 
+        stylingMode: 'text',
+        hoverStateEnabled: false,
+        focusStateEnabled: false,
+        activeStateEnabled: false
+      }">
+    </dxi-button>
+  </dx-text-box>
+</div>

@@ -1,0 +1,1106 @@
+{
+  "requestTypes": [
+    {
+      "name": "Sick Leave Request",
+      "alternateName": "طلب إجازة مرضية",
+      "category": 1,
+      "defaultReport": "Medical Report",
+      "postingRole": "Direct Manager",
+      "backdatedRequestLimit": 3,
+      "escalation": {
+        "singleSignatureTimeout": 1,
+        "escalateTo": "HR Manager",
+        "requestTimeoutBeforeSignaling": 3,
+        "signalingRole": "HR Specialist"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 1
+      },
+      "customSections": [
+        {
+          "name": "Medical Information",
+          "attributes": [
+            {
+              "name": "Hospital or Clinic Name",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 100,
+              "dropdownItems": []
+            },
+            {
+              "name": "Doctor Name",
+              "type": 1,
+              "isRequired": false,
+              "maxLength": 80,
+              "dropdownItems": []
+            },
+            {
+              "name": "Medical Report Attached",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            },
+            {
+              "name": "Hospital Admission Required",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ],
+      "isCustom": true,
+      "state": 1,
+      "id": "2"
+    },
+    {
+      "name": "Work From Home Request",
+      "alternateName": "طلب عمل عن بعد",
+      "category": 1,
+      "defaultReport": "Remote Work Agreement",
+      "postingRole": "Team Leader",
+      "backdatedRequestLimit": 1,
+      "escalation": {
+        "singleSignatureTimeout": 2,
+        "escalateTo": "Department Head",
+        "requestTimeoutBeforeSignaling": 4,
+        "signalingRole": "Admin"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 1
+      },
+      "customSections": [
+        {
+          "name": "Remote Work Arrangement",
+          "attributes": [
+            {
+              "name": "Reason for WFH",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Caregiving",
+                "Personal or Health",
+                "Focus Work",
+                "Weather or Commute"
+              ]
+            },
+            {
+              "name": "High-Speed Internet Available",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            },
+            {
+              "name": "Planned Tasks and Deliverables",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 250,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ],
+      "isCustom": true,
+      "state": 1,
+      "id": "3"
+    },
+    {
+      "name": "Business Trip Request",
+      "alternateName": "طلب انتداب ومهمة عمل",
+      "category": 1,
+      "defaultReport": "Travel Form",
+      "postingRole": "General Manager",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 3,
+        "escalateTo": "CEO",
+        "requestTimeoutBeforeSignaling": 7,
+        "signalingRole": "Finance"
+      },
+      "reminders": {
+        "signatureReminderInterval": 2,
+        "requestReminderInterval": 3
+      },
+      "customSections": [
+        {
+          "name": "Mission Details",
+          "attributes": [
+            {
+              "name": "Destination City & Country",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 80,
+              "dropdownItems": []
+            },
+            {
+              "name": "Trip Objective",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Client Meeting",
+                "Conference or Expo",
+                "Site Inspection",
+                "Branch Audit"
+              ]
+            },
+            {
+              "name": "Host Organization",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 100,
+              "dropdownItems": []
+            }
+          ]
+        },
+        {
+          "name": "Travel Logistics",
+          "attributes": [
+            {
+              "name": "Flight Booking Required",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            },
+            {
+              "name": "Hotel Accommodation Needed",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            },
+            {
+              "name": "Estimated Budget (USD)",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 20,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ],
+      "isCustom": true,
+      "state": 1,
+      "id": "4"
+    },
+    {
+      "id": "6",
+      "name": "Training & Certification Request",
+      "alternateName": "طلب دورة تدريبية أو شهادة مهنية",
+      "category": 1,
+      "state": 1,
+      "isCustom": true,
+      "defaultReport": "Training Application",
+      "postingRole": "HR Manager",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 5,
+        "escalateTo": "General Manager",
+        "requestTimeoutBeforeSignaling": 10,
+        "signalingRole": "Training Coordinator"
+      },
+      "reminders": {
+        "signatureReminderInterval": 2,
+        "requestReminderInterval": 3
+      },
+      "customSections": [
+        {
+          "name": "Course Information",
+          "attributes": [
+            {
+              "name": "Course Title",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 120,
+              "dropdownItems": []
+            },
+            {
+              "name": "Training Provider / Institute",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 100,
+              "dropdownItems": []
+            },
+            {
+              "name": "Delivery Mode",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Online Self-Paced",
+                "Online Live Sessions",
+                "Classroom / In-Person"
+              ]
+            },
+            {
+              "name": "Total Cost (USD)",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 20,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Resignation Request",
+      "alternateName": "طلب استقالة",
+      "category": 1,
+      "defaultReport": "Exit Clearance Form",
+      "postingRole": "HR Director",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 7,
+        "escalateTo": "CEO",
+        "requestTimeoutBeforeSignaling": 14,
+        "signalingRole": "Legal Advisor"
+      },
+      "reminders": {
+        "signatureReminderInterval": 3,
+        "requestReminderInterval": 5
+      },
+      "customSections": [
+        {
+          "name": "Separation Details",
+          "attributes": [
+            {
+              "name": "Primary Reason ",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Career Growth Opportunity",
+                "Relocation",
+                "Personal or Family Reasons",
+                "Higher Education Studies"
+              ]
+            },
+            {
+              "name": "Request Waive of Notice Period",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            },
+            {
+              "name": "Feedback Comments",
+              "type": 1,
+              "isRequired": false,
+              "maxLength": 300,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ],
+      "isCustom": true,
+      "state": 2,
+      "id": "7"
+    },
+    {
+      "id": "8",
+      "name": "Overtime Approval Request",
+      "alternateName": "طلب موافقة على عمل إضافي",
+      "category": 2,
+      "state": 1,
+      "isCustom": false,
+      "defaultReport": "Overtime Sheet",
+      "postingRole": "Department Head",
+      "backdatedRequestLimit": 2,
+      "escalation": {
+        "singleSignatureTimeout": 2,
+        "escalateTo": "Operations Director",
+        "requestTimeoutBeforeSignaling": 4,
+        "signalingRole": "Payroll Specialist"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 2
+      },
+      "customSections": [
+        {
+          "name": "Overtime Assignment",
+          "attributes": [
+            {
+              "name": "Project Name",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 80,
+              "dropdownItems": []
+            },
+            {
+              "name": "Overtime Timing",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Weekday Evening",
+                "Weekend Day",
+                "Public Holiday"
+              ]
+            },
+            {
+              "name": "Estimated Hours",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 10,
+              "dropdownItems": []
+            },
+            {
+              "name": "Pre-Approved by Shift Lead",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Employee Promotion Request",
+      "alternateName": "طلب ترقية موظف",
+      "category": 2,
+      "state": 1,
+      "isCustom": true,
+      "defaultReport": "Promotion Appraisal Form",
+      "postingRole": "VP of Department",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 7,
+        "escalateTo": "Executive Committee",
+        "requestTimeoutBeforeSignaling": 15,
+        "signalingRole": "HR Committee"
+      },
+      "reminders": {
+        "signatureReminderInterval": 3,
+        "requestReminderInterval": 5
+      },
+      "customSections": [
+        {
+          "name": "Nomination Information",
+          "attributes": [
+            {
+              "name": "Target Job Title",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 80,
+              "dropdownItems": []
+            },
+            {
+              "name": "Target Seniority Level",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Junior",
+                "Mid-Level",
+                "Senior",
+                "Lead or Principal"
+              ]
+            },
+            {
+              "name": "Last Appraisal Rating",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Exceeds Expectations",
+                "Consistently Meets Expectations"
+              ]
+            },
+            {
+              "name": "Promotion Justification",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 300,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "name": "Shift Swap Request",
+      "alternateName": "طلب تبديل مناوبة",
+      "category": 2,
+      "state": 1,
+      "isCustom": false,
+      "defaultReport": "Schedule Form",
+      "postingRole": "Shift Supervisor",
+      "backdatedRequestLimit": 1,
+      "escalation": {
+        "singleSignatureTimeout": 1,
+        "escalateTo": "Unit Head",
+        "requestTimeoutBeforeSignaling": 2,
+        "signalingRole": "Roster Planner"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 1
+      },
+      "customSections": [
+        {
+          "name": "Swap Details",
+          "attributes": [
+            {
+              "name": "Replacement Colleague Name",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 80,
+              "dropdownItems": []
+            },
+            {
+              "name": "Current Scheduled Shift",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Morning Shift (08:00 - 16:00)",
+                "Evening Shift (16:00 - 00:00)",
+                "Night Shift (00:00 - 08:00)"
+              ]
+            },
+            {
+              "name": "Requested New Shift",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Morning Shift (08:00 - 16:00)",
+                "Evening Shift (16:00 - 00:00)",
+                "Night Shift (00:00 - 08:00)"
+              ]
+            },
+            {
+              "name": "Mutual Agreement Acknowledged",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "name": "Department Transfer Request",
+      "alternateName": "طلب نقل داخلي بين الأقسام",
+      "category": 2,
+      "state": 1,
+      "isCustom": true,
+      "defaultReport": "Internal Transfer Form",
+      "postingRole": "HR Director",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 5,
+        "escalateTo": "CEO",
+        "requestTimeoutBeforeSignaling": 10,
+        "signalingRole": "Hiring Manager"
+      },
+      "reminders": {
+        "signatureReminderInterval": 2,
+        "requestReminderInterval": 3
+      },
+      "customSections": [
+        {
+          "name": "Transfer Specifics",
+          "attributes": [
+            {
+              "name": "Target Department",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Software Engineering",
+                "Product & Design",
+                "Marketing & Growth",
+                "Sales & Operations",
+                "HR & Admin"
+              ]
+            },
+            {
+              "name": "Transfer Reason & Skills Match",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 250,
+              "dropdownItems": []
+            },
+            {
+              "name": "Current Manager Approved",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "name": "Disciplinary Warning Notice",
+      "alternateName": "إشعار إنذار مسلكي",
+      "category": 2,
+      "state": 2,
+      "isCustom": false,
+      "defaultReport": "Disciplinary Form",
+      "postingRole": "Legal & HR Head",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 3,
+        "escalateTo": "CEO",
+        "requestTimeoutBeforeSignaling": 7,
+        "signalingRole": "Legal Dept"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 2
+      },
+      "customSections": [
+        {
+          "name": "Incident Report",
+          "attributes": [
+            {
+              "name": "Violation Category",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Repeated Unexcused Lateness",
+                "Unauthorized Absence",
+                "Code of Conduct Breach",
+                "Negligence of Duties"
+              ]
+            },
+            {
+              "name": "Incident Summary",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 300,
+              "dropdownItems": []
+            },
+            {
+              "name": "Formal Hearing Conducted",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "name": "Office Supplies Request",
+      "alternateName": "طلب قرطاسية ومستلزمات مكتبية",
+      "category": 3,
+      "state": 2,
+      "isCustom": false,
+      "defaultReport": "Procurement Order",
+      "postingRole": "Office Manager",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 2,
+        "escalateTo": "Procurement Lead",
+        "requestTimeoutBeforeSignaling": 5,
+        "signalingRole": "Storekeeper"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 2
+      },
+      "customSections": [
+        {
+          "name": "Supplies Order",
+          "attributes": [
+            {
+              "name": "Item Category",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Paper & Printing",
+                "Pens & Stationery",
+                "Archiving & Folders",
+                "Desk Organizers"
+              ]
+            },
+            {
+              "name": "Items and Quantities Required",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 200,
+              "dropdownItems": []
+            },
+            {
+              "name": "Urgent Priority",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "name": "IT Hardware Request",
+      "alternateName": "طلب أجهزة ومعدات حاسوبية",
+      "category": 3,
+      "state": 2,
+      "isCustom": true,
+      "defaultReport": "Asset Requisition Form",
+      "postingRole": "IT Support Head",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 3,
+        "escalateTo": "CTO",
+        "requestTimeoutBeforeSignaling": 6,
+        "signalingRole": "IT Admin"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 2
+      },
+      "customSections": [
+        {
+          "name": "Hardware Specification",
+          "attributes": [
+            {
+              "name": "Device Type",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Laptop (Windows Pro)",
+                "Laptop (MacBook Pro)",
+                "External 4K Monitor",
+                "Ergonomic Keyboard & Mouse",
+                "Noise-Cancelling Headset"
+              ]
+            },
+            {
+              "name": "Business Justification",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 150,
+              "dropdownItems": []
+            },
+            {
+              "name": "Replacing Damaged Equipment",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "name": "Company Vehicle Booking",
+      "alternateName": "طلب حجز سيارة الشركة",
+      "category": 3,
+      "state": 2,
+      "isCustom": false,
+      "defaultReport": "Fleet Movement Sheet",
+      "postingRole": "Logistics Coordinator",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 1,
+        "escalateTo": "Admin Manager",
+        "requestTimeoutBeforeSignaling": 3,
+        "signalingRole": "Fleet Supervisor"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 1
+      },
+      "customSections": [
+        {
+          "name": "Trip Particulars",
+          "attributes": [
+            {
+              "name": "Destination Area",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 80,
+              "dropdownItems": []
+            },
+            {
+              "name": "Vehicle Category",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Sedan (Standard)",
+                "SUV (4x4)",
+                "Passenger Van (8 seats)"
+              ]
+            },
+            {
+              "name": "Number of Passengers",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 10,
+              "dropdownItems": []
+            },
+            {
+              "name": "Valid Driving License Confirmed",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "name": "Facility Access Card Request",
+      "alternateName": "طلب إصدار بطاقة دخول للمبنى",
+      "category": 3,
+      "state": 2,
+      "isCustom": false,
+      "defaultReport": "Security Gate Pass",
+      "postingRole": "Security Manager",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 2,
+        "escalateTo": "Admin Head",
+        "requestTimeoutBeforeSignaling": 4,
+        "signalingRole": "Security Desk"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 1
+      },
+      "customSections": [
+        {
+          "name": "Access Security",
+          "attributes": [
+            {
+              "name": "Issuance Type",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "New Onboarding",
+                "Replacement (Lost Card)",
+                "Replacement (Damaged)",
+                "Temporary Contractor Pass"
+              ]
+            },
+            {
+              "name": "Security Zones Needed",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "General Work Floors Only",
+                "Server Room & Data Center",
+                "Warehouse & Loading Bay",
+                "All Facility Zones"
+              ]
+            },
+            {
+              "name": "Digital Photo Provided",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "name": "Salary Certificate",
+      "alternateName": "طلب شهادة راتب",
+      "category": 4,
+      "state": 1,
+      "isCustom": false,
+      "defaultReport": "Salary Certificate Template",
+      "postingRole": "Payroll Officer",
+      "backdatedRequestLimit": 30,
+      "escalation": {
+        "singleSignatureTimeout": null,
+        "escalateTo": null,
+        "requestTimeoutBeforeSignaling": null,
+        "signalingRole": null
+      },
+      "reminders": {
+        "signatureReminderInterval": null,
+        "requestReminderInterval": null
+      },
+      "customSections": [
+        {
+          "name": "Certificate Configuration",
+          "attributes": [
+            {
+              "name": "Recipient Entity",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Commercial Bank / Loan Application",
+                "Embassy / Visa Application",
+                "Government Entity",
+                "To Whom It May Concern"
+              ]
+            },
+            {
+              "name": "Detailed Allowances Breakdown",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            },
+            {
+              "name": "Include Bank IBAN Number",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            },
+            {
+              "name": "Format Required",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Digital E-Signed PDF",
+                "Original Stamped Hard Copy"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "name": "Experience Certificate",
+      "alternateName": "طلب شهادة خبرة وخدمة",
+      "category": 4,
+      "state": 1,
+      "isCustom": false,
+      "defaultReport": "Experience Letter Template",
+      "postingRole": "HR Specialist",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 2,
+        "escalateTo": "HR Director",
+        "requestTimeoutBeforeSignaling": 5,
+        "signalingRole": "HR Admin"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 2
+      },
+      "customSections": [
+        {
+          "name": "Document Options",
+          "attributes": [
+            {
+              "name": "Certificate Language",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "English Only",
+                "Arabic Only",
+                "Bilingual (Arabic & English)"
+              ]
+            },
+            {
+              "name": "Detailed Job Roles and Achievements",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            },
+            {
+              "name": "Addressed Organization Name",
+              "type": 1,
+              "isRequired": false,
+              "maxLength": 100,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "name": "Passport Withdrawal Request",
+      "alternateName": "طلب استلام وثيقة أو جواز سفر",
+      "category": 4,
+      "state": 1,
+      "isCustom": true,
+      "defaultReport": "Custody Release Form",
+      "postingRole": "HR Custody Officer",
+      "backdatedRequestLimit": 5,
+      "escalation": {
+        "singleSignatureTimeout": 3,
+        "escalateTo": "Department Head",
+        "requestTimeoutBeforeSignaling": 7,
+        "signalingRole": "Admin"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 2
+      },
+      "customSections": [
+        {
+          "name": "Release Purpose",
+          "attributes": [
+            {
+              "name": "Reason for Withdrawal",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Annual Vacation Abroad",
+                "Official Company Mission",
+                "Residency / Visa Renewal",
+                "Personal Emergency"
+              ]
+            },
+            {
+              "name": "Destination Country",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 60,
+              "dropdownItems": []
+            },
+            {
+              "name": "Signed Undertaking to Return Document",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "name": "Health Insurance Reimbursement Claim",
+      "alternateName": "طلب مطالبة تأمين صحي",
+      "category": 4,
+      "state": 2,
+      "isCustom": false,
+      "defaultReport": "Insurance Claim Sheet",
+      "postingRole": "Medical Claims Officer",
+      "backdatedRequestLimit": 60,
+      "escalation": {
+        "singleSignatureTimeout": 4,
+        "escalateTo": "Insurance Company Rep",
+        "requestTimeoutBeforeSignaling": 10,
+        "signalingRole": "Finance Auditor"
+      },
+      "reminders": {
+        "signatureReminderInterval": 2,
+        "requestReminderInterval": 4
+      },
+      "customSections": [
+        {
+          "name": "Medical Claim Specifics",
+          "attributes": [
+            {
+              "name": "Healthcare Facility Name",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 100,
+              "dropdownItems": []
+            },
+            {
+              "name": "Service Category",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Outpatient Consultation",
+                "Dental & Orthodontics",
+                "Optical & Glasses",
+                "Prescription Pharmacy",
+                "Inpatient / Surgery"
+              ]
+            },
+            {
+              "name": "Claimed Net Amount",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 20,
+              "dropdownItems": []
+            },
+            {
+              "name": "Medical Report & Invoices Attached",
+              "type": 3,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "aa",
+      "alternateName": "",
+      "category": 2,
+      "defaultReport": null,
+      "postingRole": null,
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": null,
+        "escalateTo": null,
+        "requestTimeoutBeforeSignaling": null,
+        "signalingRole": null
+      },
+      "reminders": {
+        "signatureReminderInterval": null,
+        "requestReminderInterval": null
+      },
+      "customSections": [
+        {
+          "id": "66c91694-6edc-411e-90e8-73611671016d",
+          "name": "",
+          "order": 1,
+          "attributes": [
+            {
+              "id": "8c720e5a-2153-4c27-afa1-89da9cb44705",
+              "name": "aa",
+              "type": 1,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": [],
+              "order": 1
+            }
+          ]
+        }
+      ],
+      "isCustom": true,
+      "state": 1,
+      "id": "o7T__Ey6lHI"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

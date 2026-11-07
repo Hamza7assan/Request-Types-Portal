@@ -1,0 +1,20 @@
+<div class="d-flex flex-column flex-md-row align-items-start align-items-md-center  gap-3 mb-4">
+  <div class="category-pills-container">
+    @for (cat of categories; track cat.label) {
+      <dx-button 
+        [text]="cat.label"
+        [height]="28"
+        [class]="'btn-category-pill ' + (selectedCategory() === cat.value ? 'active' : '')"
+        [elementAttr]="{ class: 'btn-category-pill ' + (selectedCategory() === cat.value ? 'active' : '') }"
+        (onClick)="onCategorySelect(cat.value)">
+      </dx-button>
+    }
+  </div>
+  
+  <div class="mt-2 mt-md-0 flex-shrink-0">
+    <app-checkbox
+      label="Show inactive requests"
+      [(checked)]="showInactive">
+    </app-checkbox>
+  </div>
+</div>

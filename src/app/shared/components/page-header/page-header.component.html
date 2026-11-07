@@ -1,0 +1,43 @@
+<dx-toolbar class="custom-page-toolbar mb-4">
+  <!-- title and badge -->
+  <dxi-item location="before">
+    <div *dxTemplate>
+      <div class="d-flex align-items-center gap-2">
+        <h3 class="fw-bold  text-secondary">{{ title() }}</h3>
+        @if (badgeText()) {
+          <span class="badge" [class]="badgeClass()">
+            {{ badgeText() }}
+          </span>
+        }
+      </div>
+    </div>
+  </dxi-item>
+  <
+  <!-- action buttons -->
+  @for (btn of actions(); track btn.id) {
+    @if (!btn.hidden) {
+      <dxi-item location="after">
+        <div *dxTemplate>
+          <dx-button 
+            [text]="btn.label"
+            [class]="btn.class || 'btn-light px-3'"
+            [elementAttr]="{ class: btn.class || 'btn-light px-3' }"
+            (onClick)="actionClick.emit(btn.id)">
+          </dx-button>
+        </div>
+      </dxi-item>
+    }
+  }
+
+  <!-- search box -->
+  @if (showSearch()) {
+    <dxi-item location="after" cssClass="ms-auto">
+      <div *dxTemplate class="search-bar-wrapper ms-auto">
+        <app-search-box 
+          [placeholder]="searchPlaceholder()" 
+          (searchChange)="searchChange.emit($event)">
+        </app-search-box>
+      </div>
+    </dxi-item>
+  }
+</dx-toolbar>

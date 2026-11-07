@@ -1,0 +1,15 @@
+<div>
+  <app-section-divider label="REMINDERS"></app-section-divider>
+
+  <app-days-input 
+    label="Signature Reminder Interval" 
+    [(value)]="reminders().signatureReminderInterval"
+    [readOnly]="isReadOnly()">
+  </app-days-input>
+
+  <app-days-input 
+    label="Request reminder interval" 
+    [(value)]="reminders().requestReminderInterval"
+    [readOnly]="isReadOnly()">
+  </app-days-input>
+</div>

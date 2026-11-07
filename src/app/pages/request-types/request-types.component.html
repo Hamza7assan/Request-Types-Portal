@@ -1,0 +1,25 @@
+<div class="container-fluid py-4 d-flex flex-column min-vh-100">
+  
+  <!-- title, add/import/export and search box -->
+  <app-page-header
+  title="Request types"
+  [showSearch]="true"
+  [actions]="headerActions"
+  (searchChange)="onSearch($event)"
+  (actionClick)="onHeaderAction($event)">
+</app-page-header>
+
+  <app-request-types-filters 
+    [(selectedCategory)]="selectedCategory"
+    [(showInactive)]="showInactive">
+  </app-request-types-filters>
+
+  <app-request-types-grid
+    [requests]="filteredRequests()"
+    [searchQuery]="searchQuery()"
+    (view)="onView($event)"
+    (edit)="onEdit($event)"
+    (toggleState)="toggleRequestState($event)"
+    (delete)="deleteRequest($event)">
+  </app-request-types-grid>
+</div>                   

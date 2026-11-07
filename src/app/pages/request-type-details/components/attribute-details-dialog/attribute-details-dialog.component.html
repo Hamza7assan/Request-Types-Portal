@@ -1,0 +1,189 @@
+<dx-popup
+  [visible]="isOpen()"
+  [showTitle]="true"
+  [title]="attributeData() ? 'Edit attribute' : 'Attribute details'"
+  [width]="750"
+  [maxWidth]="'95vw'"
+  [height]="'auto'"
+  [dragEnabled]="true"
+  [hideOnOutsideClick]="true"
+  [showCloseButton]="true"
+  (onShowing)="onShowing()"
+  (onHiding)="closeDialog.emit()"
+  wrapperAttr="{ class: 'custom-attribute-popup' }">
+
+  <div *dxTemplate="let data of 'content'" class="p-4 p-md-5 pt-2">
+    <dx-form [formData]="model()" labelLocation="top" [showColonAfterLabel]="false" [colCount]="2">
+              
+              <!-- Column 1: Name, MaxLength, Dropdown items -->
+              <dxi-item [colSpan]="1">
+                <div *dxTemplate>
+                  <div class="d-flex flex-column gap-4">
+                    <!-- attribute name -->
+                    <div>
+                      <label class="form-label">
+                        Name
+                        <span class="text-danger ms-1">*</span>
+                      </label>
+                      <dx-text-box
+                        class="custom-dx-input"
+                        [value]="model().name"
+                        (onValueChanged)="onNameChange($event.value)"
+                        (onFocusOut)="onNameBlur()"
+                        [isValid]="!isNameInvalid()"
+                        valueChangeEvent="input keyup change">
+                        <dx-validator validationGroup="attrDialogGroup">
+                          <dxi-validation-rule type="required" [trim]="true" message="Name is required."></dxi-validation-rule>
+                        </dx-validator>
+                      </dx-text-box>
+                      @if (isNameInvalid()) {
+                        <div class="text-danger small mt-1">
+                          Name is required.
+                        </div>
+                      }
+                    </div>
+
+                    <!-- visible only for text type -->
+                    @if (model().type === AttributeType.Text) {
+                      <div>
+                        <label class="form-label">Maximum characters</label>
+                        <dx-number-box
+                          class="custom-dx-input w-50"
+                          [value]="$any(model().maxLength)"
+                          (onValueChanged)="onMaxLengthChange($event.value)"
+                          [min]="1"
+                          [showSpinButtons]="false">
+                        </dx-number-box>
+                      </div>
+                    }
+
+                    <!-- Dropdown items: visible only for dropdown type -->
+                    @if (model().type === AttributeType.Dropdown) {
+                      <div>
+                        <label class="form-label">Drop down items</label>
+                        
+                        <!-- Input Group to Add Dropdown Item -->
+                        <div class="mb-2">
+                          <dx-text-box
+                            class="custom-dx-input"
+                            [(value)]="newDropdownItemText"
+                            placeholder="Text"
+                            valueChangeEvent="keyup input change"
+                            (onEnterKey)="addDropdownItem()">
+                            <dxi-button
+                              name="add"
+                              location="after"
+                              [options]="{
+                                text: '+ Add item',
+                                stylingMode: 'text',
+                                elementAttr: { class: 'text-primary fw-bold py-0' },
+                                onClick: onAddDropdownItemClick
+                              }">
+                            </dxi-button>
+                          </dx-text-box>
+                        </div>
+
+                        <!-- Added items list box -->
+                        <div class="border rounded bg-light p-3 min-h-100px">
+                          <span class="text-secondary small fw-medium d-block mb-3">Added items</span>
+                          
+                          @for (item of model().dropdownItems; track $index; let idx = $index) {
+                            @if (editingItemIndex() === idx) {
+                              <!-- Inline edit input directly on the option -->
+                              <div class="d-flex align-items-center gap-2 mb-2 p-1 bg-white border rounded">
+                                <dx-text-box
+                                  class="custom-dx-input flex-grow-1"
+                                  [(value)]="inlineEditText"
+                                  valueChangeEvent="keyup input change"
+                                  (onEnterKey)="saveInlineEdit(idx)">
+                                </dx-text-box>
+                                <dx-button 
+                                  icon="check"
+                                  stylingMode="text"
+                                  [elementAttr]="{ class: 'text-success p-0 border-0 bg-transparent' }"
+                                  title="Save"
+                                  (onClick)="saveInlineEdit(idx)">
+                                </dx-button>
+                                <dx-button 
+                                  icon="close"
+                                  stylingMode="text"
+                                  [elementAttr]="{ class: 'text-secondary p-0 border-0 bg-transparent' }"
+                                  title="Cancel"
+                                  (onClick)="cancelInlineEdit()">
+                                </dx-button>
+                              </div>
+                            } @else {
+                              <!-- Default item row with edit and delete actions -->
+                              <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="small text-secondary cursor-pointer" (dblclick)="startInlineEdit(idx)">{{ item }}</span>
+                                <div class="d-flex gap-3 text-secondary">
+                                  <i 
+                                    class="bi bi-trash cursor-pointer text-danger" 
+                                    title="Delete item"
+                                    (click)="removeDropdownItem(idx)">
+                                  </i>
+                                  <i 
+                                    class="bi bi-pencil-square cursor-pointer text-primary" 
+                                    title="Edit item"
+                                    (click)="startInlineEdit(idx)">
+                                  </i>
+                                </div>
+                              </div>
+                            }
+                          }
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </dxi-item>
+
+              <!-- Column 2: Type, Required -->
+              <dxi-item [colSpan]="1">
+                <div *dxTemplate>
+                  <div class="d-flex flex-column gap-4">
+                    <!-- Attribute Type -->
+                    <div>
+                      <label class="form-label">Type</label>
+                      <dx-select-box
+                       class="custom-dx-input"
+                       [value]="model().type"
+                       (onValueChanged)="onTypeChange($event.value)"
+                       [dataSource]="typeOptions"
+                       displayExpr="label"
+                       valueExpr="value">
+                      </dx-select-box>
+                    </div>
+
+                    <!-- Required Checkbox -->
+                    <div class="d-flex align-items-center justify-content-between w-100 px-1 pt-2">
+                      <label class="form-label text-secondary small fw-medium mb-0">Required</label>
+                      <dx-check-box
+                      class="custom-dx-checkbox"
+                      [value]="model().isRequired"
+                      (onValueChanged)="onRequiredChange($event.value)">
+                      </dx-check-box>
+                    </div>
+                  </div>
+                </div>
+              </dxi-item>
+
+    </dx-form>
+
+    <!-- Modal Footer Actions -->
+    <div class="mt-4 pt-3 border-top d-flex flex-column align-items-stretch gap-2">
+      <!-- Validation Summary in dialog footer -->
+      <dx-validation-summary 
+        validationGroup="attrDialogGroup"
+        class="dialog-footer-summary w-100">
+      </dx-validation-summary>
+
+      <app-action-footer
+        containerClass="w-100"
+        justify="end"
+        [actions]="dialogActions()"
+        (actionClick)="onFooterAction($event)">
+      </app-action-footer>
+    </div>
+  </div>
+</dx-popup>

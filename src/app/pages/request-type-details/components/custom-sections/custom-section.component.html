@@ -1,0 +1,79 @@
+<div>
+  
+  <app-section-divider label="CUSTOM ATTRIBUTES" containerClass="mt-5 mb-3"></app-section-divider>
+
+  <!-- reusable new section button template -->
+  <ng-template #newSectionBtn let-isLarge="isLarge">
+    <dx-button 
+      stylingMode="text"
+      class="btn btn-link text-primary text-decoration-none fw-bold d-inline-flex align-items-center"
+      [elementAttr]="{ class: 'btn btn-link text-primary text-decoration-none fw-bold d-inline-flex align-items-center ' + (isLarge ? 'gap-2 fs-6' : 'gap-1 p-0') }"
+      (onClick)="addSection()">
+      <div *dxTemplate="let data of 'content'" class="d-inline-flex align-items-center" [class.gap-2]="isLarge" [class.gap-1]="!isLarge">
+        <i class="bi bi-plus-circle-fill text-primary" [style.font-size]="isLarge ? '1.15rem' : '0.95rem'"></i>
+        <span class="text-primary fw-bold">NEW SECTION</span>
+      </div>
+    </dx-button>
+  </ng-template>
+
+  <!-- New section button (header action) -->
+  @if (!isReadOnly() && sections().length > 0) {
+    <div class="d-flex justify-content-end mb-3">
+      <ng-container *ngTemplateOutlet="newSectionBtn"></ng-container>
+    </div>
+  }
+
+  <div>
+    @if (sections().length === 0) {
+      <div class="text-center py-5">
+        <p class="text-secondary opacity-75 fs-5 mb-3 fw-medium">No sections have been added</p>
+        @if (!isReadOnly()) {
+          <ng-container *ngTemplateOutlet="newSectionBtn; context: { isLarge: true }"></ng-container>
+        }
+      </div>
+    } @else {
+      
+      <!-- Section tabs -->
+      <div class="d-flex align-items-end flex-wrap gap-3 mb-4 px-1">
+        @for (sec of sections(); track sec.id || $index; let sIndex = $index) {
+          <div 
+            class="section-tab d-flex align-items-center justify-content-between rounded-1 cursor-pointer"
+            [class.active-tab]="activeSectionIndex() === sIndex"
+            (click)="selectSection(sIndex)">
+            
+            <div class="d-flex align-items-center gap-2">
+              <span class="fw-bold text-secondary small">{{ sIndex + 1 }}</span>
+              <span class="fw-semibold text-dark small text-truncate mw-150px">
+                {{ sec.name || 'Section ' + (sIndex + 1) }}
+              </span>
+            </div>
+            
+            <!-- icon -->
+            @if (!isReadOnly()) {
+              <i class="bi bi-grid-3x2-gap text-secondary ms-3 opacity-50"></i>
+            }
+          </div>
+        }
+      </div>
+
+      @if (activeSection(); as currentSec) {
+        <app-section-card
+          [section]="currentSec"
+          [isReadOnly]="isReadOnly()"
+          (addAttribute)="openAddAttributeDialog()"
+          (editAttribute)="openEditAttributeDialog($event.index, $event.data)"
+          (deleteAttribute)="deleteAttribute($event)"
+          (deleteSection)="deleteSection(activeSectionIndex())">
+        </app-section-card>
+      }
+
+    }
+  </div>
+</div>
+
+<app-attribute-details-dialog
+  [isOpen]="isDialogOpen()"
+  [attributeData]="editingAttribute()?.data ?? null"
+  (closeDialog)="closeAttributeDialog()"
+  (saveAttribute)="onSaveAttribute($event)">
+</app-attribute-details-dialog>

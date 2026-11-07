@@ -1,0 +1,222 @@
+{
+  "requestTypes": [
+    {
+      "name": "Passport withdrawal request",
+      "alternateName": "طلب سحب جواز سفر",
+      "category": 1,
+      "defaultReport": "Standard Form",
+      "postingRole": "Direct Manager",
+      "backdatedRequestLimit": 5,
+      "escalation": {
+        "singleSignatureTimeout": 3,
+        "escalateTo": "Department Head",
+        "requestTimeoutBeforeSignaling": 7,
+        "signalingRole": "Admin"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 2
+      },
+      "customSections": [
+        {
+          "name": "Travel Details",
+          "attributes": [
+            {
+              "name": "Reason",
+              "type": 2,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "Business",
+                "Vacation",
+                "Emergency"
+              ]
+            },
+            {
+              "name": "Destination",
+              "type": 1,
+              "isRequired": true,
+              "maxLength": 100,
+              "dropdownItems": []
+            }
+          ]
+        },
+        {
+          "name": "sec2",
+          "attributes": []
+        },
+        {
+          "name": "z",
+          "attributes": []
+        }
+      ],
+      "isCustom": true,
+      "state": 1,
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Vacation request",
+      "alternateName": "طلب إجازة",
+      "category": 1,
+      "state": 2,
+      "isCustom": false,
+      "defaultReport": "Vacation Form",
+      "postingRole": "Direct Manager",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": 2,
+        "escalateTo": "HR",
+        "requestTimeoutBeforeSignaling": 5,
+        "signalingRole": "HR"
+      },
+      "reminders": {
+        "signatureReminderInterval": 1,
+        "requestReminderInterval": 1
+      },
+      "customSections": []
+    },
+    {
+      "name": "Salary Certificate",
+      "alternateName": "شهادة راتب",
+      "category": 4,
+      "defaultReport": "Certificate Template",
+      "postingRole": "Payroll Officer",
+      "backdatedRequestLimit": 30,
+      "escalation": {
+        "singleSignatureTimeout": null,
+        "escalateTo": null,
+        "requestTimeoutBeforeSignaling": null,
+        "signalingRole": null
+      },
+      "reminders": {
+        "signatureReminderInterval": null,
+        "requestReminderInterval": null
+      },
+      "customSections": [],
+      "isCustom": false,
+      "state": 1,
+      "id": "3"
+    },
+    {
+      "name": "thfdh",
+      "alternateName": "dfhfdghfd",
+      "category": 1,
+      "defaultReport": "Standard Form",
+      "postingRole": "HR Manager",
+      "backdatedRequestLimit": 1,
+      "escalation": {
+        "singleSignatureTimeout": null,
+        "escalateTo": null,
+        "requestTimeoutBeforeSignaling": null,
+        "signalingRole": null
+      },
+      "reminders": {
+        "signatureReminderInterval": 0,
+        "requestReminderInterval": -4
+      },
+      "customSections": [
+        {
+          "name": "test sec",
+          "attributes": [
+            {
+              "name": "date sign in ",
+              "type": 4,
+              "isRequired": true,
+              "maxLength": null,
+              "dropdownItems": [
+                "2",
+                "13"
+              ]
+            },
+            {
+              "name": "middle name",
+              "type": 1,
+              "isRequired": false,
+              "maxLength": 2,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ],
+      "isCustom": true,
+      "state": 1,
+      "id": "bGzN9hM"
+    },
+    {
+      "name": "winter vacation ",
+      "alternateName": "winter vacation ",
+      "category": 1,
+      "defaultReport": "Standard Form",
+      "postingRole": "HR Manager",
+      "backdatedRequestLimit": 0,
+      "escalation": {
+        "singleSignatureTimeout": null,
+        "escalateTo": null,
+        "requestTimeoutBeforeSignaling": null,
+        "signalingRole": null
+      },
+      "reminders": {
+        "signatureReminderInterval": null,
+        "requestReminderInterval": null
+      },
+      "customSections": [
+        {
+          "name": "vacation",
+          "attributes": [
+            {
+              "name": "namesec",
+              "type": 3,
+              "isRequired": false,
+              "maxLength": null,
+              "dropdownItems": []
+            }
+          ]
+        },
+        {
+          "name": "",
+          "attributes": []
+        }
+      ],
+      "isCustom": true,
+      "state": 1,
+      "id": "5SfGZFvpRUU"
+    },
+    {
+      "name": "Salary improvement ",
+      "alternateName": "زيادة راتب",
+      "category": 1,
+      "defaultReport": "Certificate Template",
+      "postingRole": "HR Manager",
+      "backdatedRequestLimit": 2,
+      "escalation": {
+        "singleSignatureTimeout": 2,
+        "escalateTo": "Department Head",
+        "requestTimeoutBeforeSignaling": 2,
+        "signalingRole": "Admin"
+      },
+      "reminders": {
+        "signatureReminderInterval": -1,
+        "requestReminderInterval": null
+      },
+      "customSections": [
+        {
+          "name": "",
+          "attributes": [
+            {
+              "name": "salName",
+              "type": 1,
+              "isRequired": false,
+              "maxLength": 15,
+              "dropdownItems": []
+            }
+          ]
+        }
+      ],
+      "isCustom": true,
+      "state": 1,
+      "id": "7C6jBTzVzVE"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

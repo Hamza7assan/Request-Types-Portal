@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center justify-content-between p-2 mb-2 rounded bg-white border">
+  <div class="d-flex align-items-center gap-3">
+
+    
+    <!-- drag Handle Icon -->
+    @if (!isReadOnly()) {
+      <i class="bi bi-grid-3x2-gap text-secondary opacity-50"></i>
+    }
+    
+    <span class="fw-bold text-secondary small">{{ formattedIndex() }}</span>
+    
+    <span class="text-dark small fw-medium text-truncate mw-150px">
+      {{ attribute().name }}
+    </span>
+    
+    <span class="border-start ps-3 ms-1 text-secondary small">
+      {{ attribute().type | attributeTypeLabel }}
+    </span>
+    
+    <span class="border-start ps-3 ms-1 text-secondary small">
+      {{ attribute().isRequired ? 'required' : '( Optional )' }}
+    </span>
+  </div>
+
+  @if (!isReadOnly()) {
+    <div class="d-flex gap-3 px-2">
+      <span class="text-primary fw-bold small cursor-pointer" (click)="edit.emit()">Edit</span>
+      <span class="text-danger fw-bold small cursor-pointer" (click)="delete.emit()">Delete</span>
+    </div>
+  }
+</div>

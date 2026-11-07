@@ -1,0 +1,96 @@
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4   ">
+  <dx-data-grid
+    class="custom-dx-grid"
+    [dataSource]="requests()"
+    [showBorders]="false"
+    [rowAlternationEnabled]="true"
+    [hoverStateEnabled]="true"
+    [columnAutoWidth]="true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="true"
+    [wordWrapEnabled]="true"
+    (onCellClick)="onCellClick($event)">
+
+    <dxo-search-panel [text]="searchQuery()" [visible]="false" [highlightSearchText]="true"></dxo-search-panel>
+    <dxo-sorting mode="multiple"></dxo-sorting>
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="[5, 10]"
+      [showInfo]="true"
+      [showNavigationButtons]="true">
+    </dxo-pager>
+
+    <!-- Request Name -->
+    <dxi-column 
+      dataField="name" 
+      caption="Name" 
+      [hidingPriority]="4"
+      cssClass="fw-semibold text-dark cursor-pointer">
+    </dxi-column>
+
+    <!-- Alternate Name -->
+    <dxi-column 
+      dataField="alternateName" 
+      caption="Alternate Name" 
+      alignment="right"
+      [hidingPriority]="0">
+    </dxi-column>
+
+    <!-- Category -->
+    <dxi-column 
+      dataField="category" 
+      caption="Category" 
+      cellTemplate="categoryTemplate" 
+      alignment="center"
+      [hidingPriority]="2">
+    </dxi-column>
+    <div *dxTemplate="let cell of 'categoryTemplate'">
+      <span class="badge bg-light text-secondary border px-2 py-1">
+        {{ cell.data.category | categoryLabel }}
+      </span>
+    </div>
+
+    <!-- Status -->
+    <dxi-column 
+      dataField="state" 
+      caption="Status" 
+      cellTemplate="statusTemplate" 
+      alignment="center"
+      [hidingPriority]="1">
+    </dxi-column>
+    <div *dxTemplate="let cell of 'statusTemplate'">
+      <span 
+        class="badge" 
+        [class.badge-status-active]="cell.data.state === RequestState.Active" 
+        [class.badge-status-inactive]="cell.data.state !== RequestState.Active">
+        {{ cell.data.state === RequestState.Active ? 'Active' : 'Inactive' }}
+      </span>
+    </div>
+
+    <!-- 3-dots dropdown menu -->
+    <dxi-column 
+      caption="Actions" 
+      cellTemplate="actionsTemplate" 
+      alignment="center" 
+      [allowSorting]="false" 
+      [width]="90"
+      [hidingPriority]="3">
+    </dxi-column>
+    <div *dxTemplate="let cell of 'actionsTemplate'">
+      <dx-drop-down-button
+        icon="overflow"
+        stylingMode="text"
+        class="action-3dots-btn"
+        [showArrowIcon]="false"
+        [items]="getRowActions(cell.data)"
+        [dropDownOptions]="{ width: 140 }"
+        displayExpr="text"
+        keyExpr="id"
+        (onItemClick)="onRowActionClick($event, cell.data)">
+      </dx-drop-down-button>
+    </div>
+
+  </dx-data-grid>
+</div>
