@@ -1,59 +1,148 @@
-# RequestTypesPortal
+# 📋 Request Types Portal
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
+A modern, responsive, enterprise-grade web application for configuring and managing organizational request types, workflows, escalation rules, and dynamic custom form attributes.
 
-## Development server
+Built with **Angular (v19+)** utilizing modern **Angular Signals**, standalone architecture, and **DevExtreme Angular** enterprise UI components.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## 🌟 Key Features
+
+### 1. Request Types Management & Grid
+- **Responsive Data Grid**: Powered by DevExtreme `dx-data-grid` with multi-column sorting, client-side pagination, search highlighting, and adaptive column hiding (`hidingPriority`).
+- **Interactive Quick Filters**: Filter requests by category pills (*Employee*, *Supervisor*, *General*, *Document*) and toggle visibility of inactive request types.
+- **State Toggle & Actions**: Contextual 3-dot dropdown menu (`dx-drop-down-button`) for viewing, editing, activating/deactivating, and safely deleting request types.
+
+### 2. Request Details & Dynamic Form Builder
+- **Static Configuration**: Configure request names, localized alternate names, categories, posting roles, default reports, and backdated request day limits.
+- **Dynamic Custom Sections**: Organize form fields into customizable, ordered sections with real-time tab switching.
+- **Dynamic Custom Attributes Builder**:
+  - Supports multiple input types: `Text`, `Drop down`, `Check box`, and `Date`.
+  - Configurable validation rules (`Required`, `Maximum characters`).
+  - Interactive modal dialog (`dx-popup`) with inline option addition, editing, and deletion for dropdown items.
+  - State isolation via `linkedSignal` to prevent draft data mutations on cancellation.
+
+### 3. Escalation & Reminder Rules
+- **Escalation Settings**: Set signature timeout thresholds before escalating to roles (e.g. *Department Head*, *HR*), and request timeouts before triggering administrative signaling.
+- **Reminders**: Configurable automated intervals for signature reminders and pending request reminders.
+
+### 4. Architecture & Clean Code Highlights
+- **Angular 19+ Modern Signals**: Reactive UI state management using `signal`, `computed`, `model`, and `linkedSignal` for predictable unidirectional data flow.
+- **High Performance (`OnPush`)**: Strict `ChangeDetectionStrategy.OnPush` across all components with zero unnecessary change detection cycles.
+- **Memory-Safe Subscriptions**: Automatic observable lifecycle cleanup using `takeUntilDestroyed(destroyRef)`.
+- **Single Source of Truth**: Centralized configuration and labels in `request-types.constants.ts` shared across pipes, filters, and form dialogs.
+- **Immutable State Updates**: Clean immutable patterns using spread operators (`...`) ensuring zero unwanted side-effects.
+
+---
+
+## 🛠️ Tech Stack & Libraries
+
+| Technology | Purpose |
+| :--- | :--- |
+| **Angular 19+** | Frontend framework (Standalone Components, Signals, New Control Flow `@if` / `@for`) |
+| **DevExtreme Angular** | Enterprise UI components (`dx-data-grid`, `dx-popup`, `dx-form`, `dx-select-box`, `validationEngine`, etc.) |
+| **RxJS** | Reactive streams for HTTP and API service interactions |
+| **Bootstrap 5.3+ & Icons** | Responsive layout grid, utility classes, and iconography |
+| **JSON Server** | Lightweight local REST API for mock backend persistence (`db.json`) |
+| **TypeScript** | Strict typing, enums, interfaces, and DTO contracts |
+
+---
+
+## 📁 Project Structure
+
+```text
+src/app/
+├── api/
+│   └── request-types/
+│       ├── request-types-dto.ts          # Interfaces and Data Transfer Objects
+│       ├── request-types-enums.ts        # Enums (RequestCategory, RequestState, etc.)
+│       ├── request-types.constants.ts    # Single source of truth for options & labels
+│       └── request-types.service.ts      # REST API client service
+├── pages/
+│   ├── request-types/                    # Main listing & overview page
+│   │   ├── components/
+│   │   │   ├── request-types-filters/    # Category filter pills & active toggles
+│   │   │   └── request-types-grid/       # Standalone DevExtreme grid component
+│   │   ├── request-types.component.ts
+│   │   └── request-types.routes.ts
+│   └── request-type-details/             # Add / Edit / View details page
+│       ├── components/
+│       │   ├── attribute-details-dialog/ # Modal dialog for creating custom attributes
+│       │   ├── attribute-item/           # Individual attribute preview chip
+│       │   ├── custom-sections/          # Dynamic section orchestrator component
+│       │   ├── details-static-form/      # Core details (name, category, role)
+│       │   ├── escalation-form/          # Escalation settings form
+│       │   ├── reminders-form/           # Reminder settings form
+│       │   └── section-card/             # Card container for section attributes
+│       └── request-type-details.component.ts
+└── shared/                               # Reusable standalone components & pipes
+    ├── components/
+    │   ├── checkbox/                     # Reusable styled checkbox
+    │   ├── days-input/                   # Days number-box input wrapper
+    │   ├── dropdown/                     # Reusable select-box with validator
+    │   ├── footer/                       # Dialog action footer component
+    │   ├── page-header/                  # Standardized toolbar page header
+    │   ├── search-box/                   # Search input box
+    │   └── section-divider/              # Divider with section header tag
+    └── pipes/
+        ├── attribute-type-label.pipe.ts  # Pipe translating attribute type enums
+        └── category-label.pipe.ts        # Pipe translating category enums
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Getting Started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Prerequisites
 
-```bash
-ng generate component component-name
-```
+- **Node.js**: v18.x or v20.x or higher
+- **npm**: v9.x or higher
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### 1. Clone the Repository
 
 ```bash
-ng build
+git clone https://github.com/Hamza7assan/Request-Types-Portal.git
+cd Request-Types-Portal
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### 2. Install Dependencies
 
 ```bash
-ng test
+npm install
 ```
 
-## Running end-to-end tests
+### 3. Start the Mock API Server
 
-For end-to-end (e2e) testing, run:
+Open a terminal and start `json-server` (runs on `http://localhost:3000`):
 
 ```bash
-ng e2e
+npx json-server --watch db.json --port 3000
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 4. Start the Angular Application
 
-## Additional Resources
+Open a second terminal and start the Angular development server:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm start
+```
+
+Navigate to `http://localhost:4200/` in your browser. The app will automatically reload on code changes.
+
+---
+
+## 🧪 Production Build
+
+To build the application bundle for production:
+
+```bash
+npm run build
+```
+
+The output artifacts will be placed in the `dist/request-types-portal` directory.
+
+---
+
+## 👤 Author
+
+Developed by **[Hamza Hassan](https://github.com/Hamza7assan)**
